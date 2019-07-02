@@ -33,11 +33,7 @@ namespace OLO.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Circuit Breaker API", Version = "v1" });
-            });
-
-            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyError) => true;
-
-            AppContext.SetSwitch("System.Net.Http.UseSocketsHttpHandler", false);
+            });            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

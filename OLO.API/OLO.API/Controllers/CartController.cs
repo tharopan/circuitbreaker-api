@@ -58,9 +58,7 @@ namespace OLO.API.Controllers
         {
             try
             {
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyError) => true;
-
+               
                 ServiceStatus status = null;
 
                 var cts = new CancellationTokenSource();
@@ -85,6 +83,16 @@ namespace OLO.API.Controllers
                 //    });
 
                 var request = new HttpRequestMessage(HttpMethod.Get, "cart/status");
+
+                ServicePointManager.SecurityProtocol = 
+                    SecurityProtocolType.Tls12 | 
+                    SecurityProtocolType.Tls11 | 
+                    SecurityProtocolType.SystemDefault |
+                    SecurityProtocolType.Tls;
+
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyError) => true;
+
+
                 var response = await client.SendAsync(request, cts.Token);
 
                 if (response.IsSuccessStatusCode)
